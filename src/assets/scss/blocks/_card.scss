@@ -1,0 +1,50 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-primary-light-alpha;
+  padding: $unit * 5 $unit * 5;
+  border-radius: 2px;
+  border: 1px solid $color-primary;
+
+
+  &_xl {
+    padding: $unit * 10 $unit * 10;
+    font-size: 1.3em;
+  }
+
+  &__text {
+    .card_xl & {
+      margin-bottom: 0;
+    }
+  }
+
+  &__title {
+    margin-bottom: $unit;
+
+    .card_xl & {
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: $unit * 5;
+    }
+  }
+
+  &__image-container {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: $unit * 5;
+  }
+
+  &__image {
+    border: 20px solid $color-secondary-alpha;
+
+    .card_xl & {
+      @include wh(300px);
+    }
+
+    &-additional-content {
+      margin-left: $unit * 3;
+      flex: 0 0 45%;
+    }
+  }
+}

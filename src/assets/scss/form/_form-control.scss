@@ -1,0 +1,10 @@
+.form__control {
+  border-bottom: 1px solid black;
+  font-size: 1.1rem;
+  padding: 5px 10px 2px;
+
+  &:focus {
+    padding: 5px 10px 1px;
+    border-bottom: 2px solid black;
+  }
+}

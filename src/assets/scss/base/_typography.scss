@@ -1,0 +1,13 @@
+@font-face {
+  src: url(../../fonts/YanoneKaffeesatz-Bold.ttf) format("truetype");
+  font-family: YanoneKaffeesatz-Bold;
+}
+@font-face {
+  src: url(../../fonts/YanoneKaffeesatz-Regular.ttf) format("truetype");
+  font-family: YanoneKaffeesatz-Regular;
+}
+
+body {
+  font-size: 18px;
+  font-family: $font-regular, serif, sans-serif;
+}

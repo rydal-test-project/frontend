@@ -1,0 +1,59 @@
+.study {
+  &__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: $unit * 2 $unit;
+
+    th {
+      font-size: 1.5em;
+      padding-bottom: $unit * 3;
+
+      &:after {
+        content: '';
+        display: block;
+        height: 2px;
+        background-color: $color-secondary;
+        margin: $unit * 2 auto 0;
+        width: 80%;
+      }
+    }
+
+    td {
+      position: relative;
+      font-size: 1.3em;
+      padding: $unit * 2;
+      text-align: center;
+      border: 2px dotted $color-primary;
+      border-radius: 5px;
+
+      a {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &.has-link {
+        border: 2px dotted $color-secondary;
+        transition: background-color ease-in .2s;
+
+        &:hover {
+          background-color: $color-primary-alpha;
+
+        }
+      }
+    }
+
+    &-container {
+      padding: $unit * 8;
+
+      background-color: $color-primary-light-alpha;
+      border-radius: 2px;
+      border: 1px solid $color-primary;
+    }
+  }
+}

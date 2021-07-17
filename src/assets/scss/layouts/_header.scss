@@ -1,0 +1,37 @@
+.header {
+  width: 100%;
+  padding: 15px 0;
+  font-size: 1.3rem;
+}
+
+.nav {
+  position: relative;
+
+  &__links-list {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    &-item {
+    }
+  }
+
+  &__link {
+    display: block;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 10px 20px;
+    transition: font-weight ease-in .2s;
+
+    &:hover {
+      font-weight: 600;
+    }
+  }
+
+  &__line {
+    display: block;
+    position: absolute;
+    background-color: black;
+    height: 2px;
+    transition: left ease-out .3s, width ease-in .3s;
+  }
+}

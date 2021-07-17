@@ -1,0 +1,19 @@
+.user-info {
+  text-align: center;
+  display: flex;
+
+  &__container {
+    max-width: 600px;
+  }
+
+  &__fio {
+    &:after {
+      content: '';
+      display: block;
+      height: 2px;
+      background-color: $color-secondary;
+      margin: $unit * 2 auto 0;
+      width: 70%;
+    }
+  }
+}

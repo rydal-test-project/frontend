@@ -1,0 +1,15 @@
+@mixin wh($width: 100%, $height: 100%) {
+  width: $width;
+  height: $height;
+}
+
+@mixin onDownSize($type) {
+  @media (max-width: $type) {
+    @content;
+  }
+}
+@mixin onUpSize($type) {
+  @media (min-width: $type) {
+    @content;
+  }
+}

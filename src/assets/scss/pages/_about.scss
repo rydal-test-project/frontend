@@ -1,0 +1,16 @@
+.about {
+  overflow-y: hidden;
+
+  &__cards-container {
+    column-width: auto;
+    column-count: 3;
+    column-gap: 50px;
+    column-fill: auto;
+  }
+
+  &__card {
+    break-inside:avoid;
+    display:block;
+    margin: $unit 0;
+  }
+}

@@ -1,0 +1,17 @@
+$font-regular: YanoneKaffeesatz-Regular;
+$font-bold: YanoneKaffeesatz-Bold;
+
+$xl: 1200px;
+$lg: 900px;
+$md: 760px;
+$sm: 520px;
+$xs: 320px;
+
+$color-primary: #639ab8;
+$color-primary-light: #c2e1f5;
+$color-secondary: #002135;
+$color-primary-alpha: rgba(red($color-primary), green($color-primary), blue($color-primary), 0.7);
+$color-primary-light-alpha: rgba(red($color-primary-light), green($color-primary-light), blue($color-primary-light), 0.7);
+$color-secondary-alpha: rgba(red($color-secondary), green($color-secondary), blue($color-secondary), 0.7);
+
+$unit: 8px;

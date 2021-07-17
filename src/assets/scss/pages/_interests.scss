@@ -1,0 +1,74 @@
+.interests {
+  display: flex;
+  flex-direction: column;
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 600px;
+      justify-content: center;
+
+      &:after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: $color-secondary;
+        margin-top: $unit * 2;
+      }
+
+      &-item {
+        padding: 0 $unit * 2;
+      }
+    }
+
+    &-link {
+      font-size: 2em;
+
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        opacity: 0;
+        height: 1px;
+        margin-top: -5px;
+        background-color: $color-secondary;
+        transform: translateX(-100%);
+        transition: transform ease-in .3s, opacity ease-in .3s;
+      }
+
+      &:hover {
+        &:after {
+          transform: unset;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__card {
+    margin-bottom: $unit * 4;
+  }
+
+  &__card-list {
+    text-align: center;
+
+    &-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-height: 100%;
+
+      overflow-y: auto;
+    }
+
+    &-item {
+      margin-bottom: $unit * 2;
+    }
+  }
+}
