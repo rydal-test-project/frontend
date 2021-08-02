@@ -1,0 +1,8 @@
+{
+    user {
+        data {
+            id,
+            name
+        }
+    }
+}

@@ -1,15 +1,6 @@
-import {User, userStore} from "./user";
-import {createContext} from "react";
+import { inject } from 'react-ioc'
+import { AppStore } from "./app";
 
-
-export interface IStores {
-  userStore: User
+export default class Stores {
+    @inject(AppStore) app!: AppStore
 }
-
-const stores: IStores = {
-  userStore
-};
-
-export const storesContext = createContext<IStores>(stores);
-
-export default stores;

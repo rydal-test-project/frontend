@@ -1,28 +1,13 @@
 import React, {useContext, useState} from "react";
 import FormGroup from "../form/FormGroup";
 import Auth from "../../services/auth";
-import {storesContext} from "../../stores";
 
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const stores = useContext(storesContext);
   const submitHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    stores.userStore.setInLoggingState(true);
-
-    Auth.login({ email, password})
-      .then(res => {
-        localStorage.setItem('access_token', res.data.access_token);
-        localStorage.setItem('refresh_token', res.data.refresh_token);
-        stores.userStore.setIsLogged(true);
-      })
-      .catch(err => {
-        console.error(err);
-        setPassword('');
-      })
-      .finally(() => stores.userStore.setInLoggingState(false))
   };
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.name) {

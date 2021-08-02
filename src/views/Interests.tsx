@@ -2,8 +2,7 @@ import React, {useState} from "react";
 import {Card} from "../components/ui/Card";
 import programing from "../assets/img/programing.png";
 import $ from "jquery";
-import {gql, useQuery} from "@apollo/client";
-import User from "../models/user";
+import {gql} from "@apollo/client";
 
 
 const GE_LIST_USERS = gql`
@@ -25,7 +24,6 @@ type interest = {
   list: string[]
 }
 export default function Interests () {
-  const { loading, error, data } = useQuery<User[]>(GE_LIST_USERS);
   const [interests] = useState<interest[]>([
     {
       id: 1,
@@ -54,16 +52,6 @@ export default function Interests () {
     event.preventDefault();
     window.scrollTo({ top: $(card).position()?.top as number - 10, behavior: 'smooth'})
   };
-
-  if (loading) {
-    return (
-      <>
-        {error}
-      </>
-    )
-  }
-
-  console.log(error)
 
   return (
     <div className="container">

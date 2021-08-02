@@ -2,6 +2,9 @@
   "plugins": [
     "react-hot-loader/babel",
     "transform-decorators-legacy",
-    "transform-class-properties"
+    "transform-class-properties",
+    ["babel-plugin-styled-components", {
+      "sst": true
+    }]
   ]
 }

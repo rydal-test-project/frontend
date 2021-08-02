@@ -3,7 +3,7 @@ import {URL_GQ} from "../constants/env";
 
 
 export default new ApolloClient({
-    uri: 'api/graphql',
+    uri: URL_GQ,
     cache: new InMemoryCache()
 });
 

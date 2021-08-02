@@ -1,31 +1,24 @@
 import React from "react";
-import {inject, observer} from "mobx-react";
-import {User} from "../stores/user";
+import {observer} from "mobx-react-lite";
 import Login from "../components/sections/Login";
 import TextLoader from "../components/widgets/TextLoader";
 import UserInfo from "../components/parts/index/UserInfo";
 
 
-interface IProps {
-  userStore: User
-}
+const Index: React.FC = () => {
 
-@inject('userStore')
-@observer
-export default class Index extends React.Component<IProps, {}> {
-  render(): React.ReactElement<React.JSXElementConstructor<any>> {
-
-    return (
-      <div className="container container_full-height">
-        {
-          this.props.userStore.inLoggingState ?
-            (<TextLoader label="Обработка"/>)
-            : this.props.userStore.isLogged ?
+  return (
+    <div className="container container_full-height">
+      {
+        false ?
+          (<TextLoader label="Обработка"/>)
+          : false ?
             (<UserInfo/>)
             :
             (<Login/>)
-        }
-      </div>
-    )
-  }
+      }
+    </div>
+  )
 }
+
+export default observer(Index);

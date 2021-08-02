@@ -3,22 +3,25 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import './assets/scss/index.scss';
 import {BrowserRouter} from 'react-router-dom';
-import {Provider} from 'mobx-react'
-import stores from "./stores";
 import {ApolloProvider} from "@apollo/client";
 import apollo from "./common/apollo";
-require('dotenv').config();
+import appLogger from "./debug/app";
+import {USE_DEBUG} from "./constants/env";
 
+
+localStorage.debug = USE_DEBUG ? '*' : ''
+
+appLogger('booting...')
+
+require('dotenv').config();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider {...stores}>
-        <ApolloProvider client={apollo}>
-          <BrowserRouter>
-            <App/>
-          </BrowserRouter>
-        </ApolloProvider>
-    </Provider>
+    <ApolloProvider client={apollo}>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
