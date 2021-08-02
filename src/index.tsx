@@ -6,12 +6,12 @@ import {BrowserRouter} from 'react-router-dom';
 import {ApolloProvider} from "@apollo/client";
 import apollo from "./common/apollo";
 import appLogger from "./debug/app";
-import {USE_DEBUG} from "./constants/env";
+import {env} from "./constants";
 
 
-localStorage.debug = USE_DEBUG ? '*' : ''
+localStorage.debug = env.USE_DEBUG ? '*' : '';
 
-appLogger('booting...')
+appLogger('booting...');
 
 require('dotenv').config();
 

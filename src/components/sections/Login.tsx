@@ -1,13 +1,21 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import FormGroup from "../form/FormGroup";
-import Auth from "../../services/auth";
+import {useInstance} from "react-ioc";
+import AuthService from "../../services/auth";
 
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const authService = useInstance(AuthService);
   const submitHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+
+    authService.login({ email, password }).then(() => {
+      authService.init();
+    }).catch(() => {
+      setPassword('');
+    });
   };
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.name) {
@@ -21,10 +29,10 @@ export default function Login() {
       <h1 className="login__title">Кто вы?</h1>
       <form className="login__form form">
         <FormGroup label="Логин" labelFor="email">
-          <input className="form__control" type="email" name="email" id="email" onChange={event => inputHandler(event)}/>
+          <input className="form__control" value={email} type="email" name="email" id="email" onChange={event => inputHandler(event)}/>
         </FormGroup>
         <FormGroup label="Пароль" labelFor="password">
-          <input className="form__control" type="password" name="password" id="password" onChange={event => inputHandler(event)}/>
+          <input className="form__control" value={password} type="password" name="password" id="password" onChange={event => inputHandler(event)}/>
         </FormGroup>
         <div className="login__buttons">
           <button className="button button_primary" onClick={event => submitHandler(event)}>Попытаться войти</button>

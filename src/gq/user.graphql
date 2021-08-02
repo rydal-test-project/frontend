@@ -1,8 +1,0 @@
-{
-    user {
-        data {
-            id,
-            name
-        }
-    }
-}

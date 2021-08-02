@@ -7,13 +7,16 @@ import Stores from "../stores";
 import About from "../views/About";
 import Interests from "../views/Interests";
 import Study from "../views/Study/Study";
-import {provider} from 'react-ioc'
+import {provider, useInstance} from 'react-ioc'
 import ModelsData from "../models";
 import AuthService from "../services/auth";
-import {AppStore} from "../stores/app";
+import AppStore from "../stores/appStore";
 
 
 const App: React.FC = () => {
+  const authService = useInstance(AuthService);
+  authService.init();
+
 
   return (
     <>

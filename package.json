@@ -22,6 +22,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/lodash": "^4.14.171",
     "@types/debug": "^4.1.7",
+    "@types/js-cookie": "^2.2.7",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "dotenv": "^10.0.0",
@@ -39,7 +40,8 @@
     "debug": "^4.3.2",
     "styled-components": "^5.3.0",
     "mobx-state-tree": "^5.0.2",
-    "react-ioc": "^1.0.0"
+    "react-ioc": "^1.0.0",
+    "js-cookie": "^3.0.0"
   },
   "eslintConfig": {
     "extends": [
