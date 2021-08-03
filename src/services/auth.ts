@@ -1,15 +1,17 @@
 import {Base} from "./base";
 import api from "../common/api";
 import {AxiosResponse} from "axios";
-import {loginResponse} from "../common/types";
+import {loginResponse, userDataResponse} from "../common/types";
 import {inject} from "react-ioc";
 import AppStore from "../stores/appStore";
 import {pending} from "../constants";
 import {authServiceLogger} from "../debug/services";
+import ModelsData from "../models";
 
 
 export default class AuthService extends Base {
   @inject(AppStore) appStore!: AppStore;
+  @inject(ModelsData) modelData!: ModelsData;
 
   login(data: { email: string, password: string }): Promise<AxiosResponse<loginResponse>> {
     this.appStore.setPending(pending.LOGIN);
@@ -26,20 +28,32 @@ export default class AuthService extends Base {
     });
   }
 
-  init(): void {
-    this.appStore.setPending(pending.INIT_USER);
-    authServiceLogger('init started');
-
-
+  init(): Promise<AxiosResponse<userDataResponse>> | null {
     if (localStorage.getItem('access_token')) {
-      api.get<loginResponse>('auth/user').then(res => {
-        console.log(res)
-      }).catch(() => {
+      authServiceLogger('init started');
+      this.appStore.setPending(pending.INIT_USER);
+
+      const res = api.get<userDataResponse>('auth/user').then(res => {
+        const data = res.data;
+
+        this.modelData.user.setInfo(data);
+
+        authServiceLogger('accepted');
+
+        return res;
+      }).catch(error => {
         localStorage.removeItem('access_token');
-      }).finally(() => {
+
+        return error;
+      });
+
+      res.finally(() => {
         this.appStore.unSetPending(pending.INIT_USER);
-        authServiceLogger('init finished');
-      })
+      });
+
+      return res;
     }
+
+    return null
   }
 }

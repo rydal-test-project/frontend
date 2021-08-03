@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const inst = axios.create({
-  baseURL: '/api',
+  baseURL: '/api'
 });
 
 inst.interceptors.request.use(config => {

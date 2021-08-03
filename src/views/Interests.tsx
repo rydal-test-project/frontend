@@ -2,19 +2,7 @@ import React, {useState} from "react";
 import {Card} from "../components/ui/Card";
 import programing from "../assets/img/programing.png";
 import $ from "jquery";
-import {gql} from "@apollo/client";
 
-
-const GE_LIST_USERS = gql`
-    {
-        users{
-            data{
-                id,
-                email
-            }
-        }
-    }
-`;
 
 type interest = {
   id: number,

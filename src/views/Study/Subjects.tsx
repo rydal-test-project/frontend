@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 
 
 export default function Study() {
+/*
   const [subjects] = useState([
     {
       name: 'Физическая культура',
@@ -40,6 +41,7 @@ export default function Study() {
       semesters: [4]
     }
   ]);
+*/
   // todo: Доделать эту парашу так, что бы можно было получать по АПИ и выводить .has-link для td с ссылками
 
   return (

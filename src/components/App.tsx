@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 import {Switch, Route} from 'react-router-dom'
@@ -15,8 +15,10 @@ import AppStore from "../stores/appStore";
 
 const App: React.FC = () => {
   const authService = useInstance(AuthService);
-  authService.init();
 
+  useEffect(() => {
+    authService.init();
+  }, [authService]);
 
   return (
     <>

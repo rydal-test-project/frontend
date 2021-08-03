@@ -1,8 +1,8 @@
 import debug from "debug";
 
 
-const modelsLogger = debug('store')
-const userModelLogger = modelsLogger.extend('app')
+const modelsLogger = debug('model');
+const userModelLogger = modelsLogger.extend('user');
 
 
 export {
