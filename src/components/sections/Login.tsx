@@ -32,7 +32,7 @@ export default function Login() {
           <input className="form__control" value={email} type="email" name="email" id="email" onChange={event => inputHandler(event)}/>
         </FormGroup>
         <FormGroup label="Пароль" labelFor="password">
-          <input className="form__control" value={password} type="password" name="password" id="password" onChange={event => inputHandler(event)}/>
+          <input className="form__control" value={password} type="password" name="password" id="password" onChange={event => inputHandler(event)} autoComplete="off"/>
         </FormGroup>
         <div className="login__buttons">
           <button className="button button_primary" onClick={event => submitHandler(event)}>Попытаться войти</button>

@@ -1,5 +1,4 @@
 import { types } from 'mobx-state-tree'
-import { userModelLogger } from "../debug";
 import {userDataResponse} from "../common/types";
 
 

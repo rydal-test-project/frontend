@@ -36,9 +36,9 @@ export default class AuthService extends Base {
       const res = api.get<userDataResponse>('auth/user').then(res => {
         const data = res.data;
 
-        this.modelData.user.setInfo(data);
-
         authServiceLogger('accepted');
+
+        this.modelData.user.setInfo(data);
 
         return res;
       }).catch(error => {
