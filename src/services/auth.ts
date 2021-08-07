@@ -38,11 +38,15 @@ export default class AuthService extends Base {
 
         authServiceLogger('accepted');
 
-        this.modelData.user.setInfo(data);
+        if (data) {
+          this.modelData.user.setInfo(data);
+        }
 
         return res;
       }).catch(error => {
-        localStorage.removeItem('access_token');
+        if (error?.response) {
+          localStorage.removeItem('access_token');
+        }
 
         return error;
       });

@@ -1,12 +1,11 @@
 export type groupData = {
   id: number;
   name: string;
-}
+};
 export type departmentData = {
   id: number;
   name: string;
-}
-
+};
 export type userData = {
   id: number;
   email: string;
@@ -16,4 +15,9 @@ export type userData = {
   phone_number: string;
   group: groupData,
   department: departmentData
+};
+export type gqPaginatorData = {
+  currentPage: 1;
+  hasMorePages: true;
+  total: 100;
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {forwardRef} from "react";
 import cs from "classnames"
 
 
@@ -14,53 +14,49 @@ type props = {
   md?: boolean,
   imageAlt?: string,
   imageAdditionalContentSlot?: () => React.ReactElement,
-  cardRef?: (el: HTMLDivElement) => void,
+  children?: React.ReactElement
 }
-export class Card extends React.Component<props, any>{
-
-  renderHead(): React.ReactElement {
+const Card: React.ForwardRefExoticComponent<props> = forwardRef((props: props, ref: React.Ref<HTMLDivElement>) => {
+  // @ts-ignore
+  const size = ['xl', 'lg'].find(size => !!props[size]) || 'md';
+  const renderHead: () => React.ReactElement = () => {
     return (
       <div className="card__head">
-        <h3 className="card__title">{this.props.title}</h3>
+        <h3 className="card__title">{props.title}</h3>
       </div>
     )
-  }
-
-  renderBody(): React.ReactElement {
+  };
+  const renderBody: () => React.ReactElement = () => {
     return (
       <div className="card__body">
-        {this.props.imagePath && (
+        {props.imagePath && (
           <div className="card__image-container">
-            <img className="card__image" src={this.props.imagePath} alt={this.props.imageAlt || this.props.title}/>
-            {this.props.imageWithContent && (
+            <img className="card__image" src={props.imagePath} alt={props.imageAlt || props.title}/>
+            {props.imageWithContent && (
               <div className="card__image-additional-content">
-                {this.props.imageWithContentUseChildren && (
+                {props.imageWithContentUseChildren && (
                   <>
-                    {this.props.imageAdditionalContentSlot && this.props.imageAdditionalContentSlot()}
+                    {props.imageAdditionalContentSlot && props.imageAdditionalContentSlot()}
                   </>
                 )}
               </div>
             )}
           </div>
         )}
-        {this.props.children ?
-          (<>{this.props.children}</>)
-          : (<p className="card__text">{this.props.text}</p>)
+        {props.children ?
+          (<>{props.children}</>)
+          : (<p className="card__text">{props.text}</p>)
         }
       </div>
     )
-  }
+  };
 
-  render(): React.ReactElement {
-    // @ts-ignore
-    const size = ['xl', 'lg'].find(size => !!this.props[size]) || 'md';
+  return (
+    <div className={cs([...(props.classes || []), 'card', `card_${size}`])} ref={ref}>
+      {renderHead()}
+      {renderBody()}
+    </div>
+  );
+});
 
-
-    return (
-      <div className={cs([...(this.props.classes || []), 'card', `card_${size}`])} ref={this.props.cardRef}>
-        {this.renderHead()}
-        {this.renderBody()}
-      </div>
-    );
-  }
-}
+export default Card

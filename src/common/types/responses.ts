@@ -1,4 +1,4 @@
-import {userData} from "./data";
+import {gqPaginatorData, userData} from "./data";
 
 
 export type apiResponse <t>  = {
@@ -8,3 +8,7 @@ export type apiResponse <t>  = {
 }
 export interface userDataResponse extends apiResponse<userData> { }
 export type loginResponse = { access_token: string; refresh_token: string; token_type: string; expires_in: number };
+export type gqResponseWithPaginate <t> = {
+  data: t[],
+  paginatorInfo: gqPaginatorData
+}

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Card} from "../components/ui/Card";
+import Card from "../components/ui/Card";
 import programing from "../assets/img/programing.png";
 import $ from "jquery";
 
@@ -58,7 +58,7 @@ export default function Interests () {
         <section className="section">
           <div className="interests__cards-container">
             {interests.map((interest, idx) => (
-              <Card classes={['interests__card']} key={idx} cardRef={el => cards[idx] = el}
+              <Card classes={['interests__card']} key={idx}
                     imageWithContent
                     imageWithContentUseChildren
                     xl
