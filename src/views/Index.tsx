@@ -16,8 +16,8 @@ const Index: React.FC = () => {
       <section className="user-info">
         <div className="user-info__container container">
           <h1 className="user-info__fio">{user.fio && user.fio.shortFio()}</h1>
-          <h2 className="user-info__department">23</h2>
-          <h2 className="user-info__group">23</h2>
+          <h2 className="user-info__department">{user.department && user.department.name}</h2>
+          <h2 className="user-info__group">{user.group && user.group.name}</h2>
         </div>
       </section>
     )

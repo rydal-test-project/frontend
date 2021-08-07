@@ -1,5 +1,5 @@
 import { types } from 'mobx-state-tree'
-import {userDataResponse} from "../common/types";
+import {userData} from "../common/types";
 
 
 export const FioModel = types.model('Fio', {
@@ -22,17 +22,36 @@ export const FioModel = types.model('Fio', {
       `${self.patronymic} ${self.name}. ${self.surname}.`
   },
 }));
+
+export const GroupModel = types.model('Group', {
+  id: types.maybeNull(types.number),
+  name: types.maybeNull(types.string),
+}).actions(self => ({
+})).views(self => ({
+}));
+
+export const DepartmentModel = types.model('Department', {
+  id: types.maybeNull(types.number),
+  name: types.maybeNull(types.string),
+}).actions(self => ({
+})).views(self => ({
+}));
+
 const UserModel = types.model('User', {
   id: types.optional(types.number, -1),
   fio: types.maybe(FioModel),
+  group: types.maybe(GroupModel),
+  department: types.maybe(DepartmentModel),
   email: types.optional(types.string, ''),
   phone_number: types.maybeNull(types.string),
   isInit: types.optional(types.boolean, false),
 }).actions(self => ({
-  setInfo: (payload: userDataResponse) => {
-    const { name, surname, patronymic } = payload;
+  setInfo: (payload: userData) => {
+    const { name, surname, patronymic, group, department } = payload;
 
     self.fio = FioModel.create({ name, surname, patronymic });
+    self.group = GroupModel.create(group);
+    self.department = DepartmentModel.create(department);
     self.id = payload.id;
     self.isInit = true;
     self.email = payload.email;

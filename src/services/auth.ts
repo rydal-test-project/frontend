@@ -34,7 +34,7 @@ export default class AuthService extends Base {
       this.appStore.setPending(pending.INIT_USER);
 
       const res = api.get<userDataResponse>('auth/user').then(res => {
-        const data = res.data;
+        const data = res.data.data;
 
         authServiceLogger('accepted');
 
