@@ -5,13 +5,12 @@ import {useEffect, useState} from "react";
 interface IProps {
   label?: string
 }
-let intervalId: NodeJS.Timeout;
 
 export default function TextLoader({ label }: IProps) {
   const [dotsCount, setDotsCount] = useState<number>(0);
 
   useEffect(() => {
-    intervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       setDotsCount(dotsCount > 2 ? 0 : dotsCount + 1);
     }, 500)
     return () => {
