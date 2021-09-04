@@ -1,7 +1,8 @@
-import React, {useState} from "react";
-import FormGroup from "../form/FormGroup";
+import React, {useRef, useState} from "react";
+import FormGroup from "../../ui/FormGroup";
 import {useInstance} from "react-ioc";
-import AuthService from "../../services/auth";
+import AuthService from "../../../services/auth";
+import {Input} from "../../ui";
 
 
 export default function Login() {
@@ -28,8 +29,8 @@ export default function Login() {
     <section className="login">
       <h1 className="login__title">Кто вы?</h1>
       <form className="login__form form">
-        <FormGroup label="Логин" labelFor="email">
-          <input className="form__control" value={email} type="email" name="email" id="email" onChange={event => inputHandler(event)}/>
+        <FormGroup  labelFor="email">
+          <Input placeholder={'email'} />
         </FormGroup>
         <FormGroup label="Пароль" labelFor="password">
           <input className="form__control" value={password} type="password" name="password" id="password" onChange={event => inputHandler(event)} autoComplete="off"/>

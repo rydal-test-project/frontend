@@ -1,6 +1,6 @@
 import React from "react";
 import {observer} from "mobx-react-lite";
-import Login from "../components/sections/Login";
+import Login from "../components/widgets/forms/Login";
 import TextLoader from "../components/widgets/TextLoader";
 import {useInstance} from "react-ioc";
 import ModelsData from "../models";
