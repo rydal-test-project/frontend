@@ -1,7 +1,4 @@
-import React, {
-    memo, MouseEvent,
-    ReactNode, SyntheticEvent, useEffect, useState
-} from "react";
+import React, {memo, MouseEvent, ReactNode, SyntheticEvent, useEffect, useState} from "react";
 import {IComponentProps} from "../../../common/types";
 import style from './style.module.scss'
 import InputMask from 'react-input-mask';
@@ -61,10 +58,9 @@ const Input: React.NamedExoticComponent<IInputProps> = memo(({
                    </div>
                )}
 
-               <InputMask
-                   mask={mask || ''} inputRef={handleSetInputRef} onBlur={handleBlur} onChange={handleChange} />
+               <InputMask mask={mask || ''} inputRef={handleSetInputRef} onBlur={handleBlur} onChange={handleChange} />
            </div>
-            <div className={cn(style.input__underline, { [style.input__underline__active]: isFocused || value })} />
+            <div className={cn(style.input__underline, { [style.input__underline_active]: isFocused || value })} />
         </div>
     )
 })

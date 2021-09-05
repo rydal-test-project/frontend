@@ -1,4 +1,6 @@
 @import "../../../assets/scss/base/variables";
+
+
 $input-height: 30px;
 
 .input {
@@ -37,7 +39,7 @@ $input-height: 30px;
     transition: width ease-in .2s;
     background-color: $color-primary;
 
-    &__active {
+    &_active {
       width: 100%;
     }
   }
