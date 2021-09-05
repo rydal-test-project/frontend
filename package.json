@@ -48,6 +48,9 @@
     "react-input-mask": "^2.0.4"
   },
   "eslintConfig": {
+    "rules": {
+      "no-restricted-globals": "off"
+    },
     "extends": [
       "react-app",
       "react-app/jest"
