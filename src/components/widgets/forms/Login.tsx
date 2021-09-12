@@ -10,8 +10,7 @@ export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const authService = useInstance(AuthService);
-  const getEmail = () => email
-  const { error, allowValidate, totalIsValid, isInvalid, isDirty } = useValidation({
+  const { error, allowValidate, totalIsValid } = useValidation({
     email: {
       validators: [
           (value: string) => value.match(/\w+@\w+\.\w+/) !== null || 'Не верная почта'
