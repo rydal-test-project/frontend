@@ -3,7 +3,7 @@ import FormGroup from "../../ui/FormGroup";
 import {useInstance} from "react-ioc";
 import AuthService from "../../../services/auth";
 import {Input} from "../../ui";
-import {useValidation} from "../../../validation";
+import {emailValidator, requiredValidator, useValidation} from "@validation";
 
 
 export default function Login() {
@@ -13,9 +13,16 @@ export default function Login() {
   const { error, allowValidate, totalIsValid } = useValidation({
     email: {
       validators: [
-          (value: string) => value.match(/\w+@\w+\.\w+/) !== null || 'Не верная почта'
+          requiredValidator,
+          emailValidator,
       ],
       get: email
+    },
+    password: {
+      validators: [
+          requiredValidator,
+      ],
+      get: password
     }
   })
   const submitHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,9 +38,6 @@ export default function Login() {
       setPassword('');
     });
   };
-  const handleChangeEmail = (value: string) => {
-    setEmail(value)
-  }
 
   const disable = () => {
     const res = totalIsValid()
@@ -50,7 +54,7 @@ export default function Login() {
         <FormGroup>
           <>
             { error('email') }
-            <Input placeholder="Email" onChange={handleChangeEmail} />
+            <Input placeholder="Email" onChange={setEmail} />
           </>
         </FormGroup>
         <FormGroup  >
