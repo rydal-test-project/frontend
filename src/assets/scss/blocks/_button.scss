@@ -11,4 +11,8 @@
     border-color: $color-secondary;
     color: white;
   }
+
+  &:disabled {
+    background-color: lightgray;
+  }
 }

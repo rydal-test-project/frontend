@@ -1,0 +1,32 @@
+@import '../../../assets/scss/base/variables';
+$className: formField;
+
+.formField {
+
+  &__field {
+
+  }
+
+  &__errorWrapper {
+
+  }
+
+  &__error {
+    margin: 0;
+    color: $color-validation-error;
+    animation: showError .2s ease-out;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 25px;
+  }
+}
+
+@keyframes showError {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

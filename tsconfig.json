@@ -24,6 +24,9 @@
     "paths": {
       "@validation": [
         "src/validation"
+      ],
+      "@ui": [
+        "src/components/ui"
       ]
     }
   },

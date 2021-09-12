@@ -15,3 +15,9 @@ $color-primary-light-alpha: rgba(red($color-primary-light), green($color-primary
 $color-secondary-alpha: rgba(red($color-secondary), green($color-secondary), blue($color-secondary), 0.7);
 
 $unit: 8px;
+
+$color-red: #dc3545;
+$color-green: #28a745;
+
+$color-validation-error: $color-red;
+$color-validation-success: $color-green;

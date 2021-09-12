@@ -7,12 +7,14 @@ import cn from 'classnames';
 
 interface IInputProps extends IComponentProps {
     mask?: string;
+    type?: string;
     placeholder?: ReactNode;
     inputRef?: (el: HTMLInputElement) => void;
     onChange?: (value: string) => void;
 }
 
 const Input: React.NamedExoticComponent<IInputProps> = memo(({
+                                                                 type = 'text',
                                                                  mask,
                                                                  placeholder,
                                                                  onChange,
@@ -50,7 +52,7 @@ const Input: React.NamedExoticComponent<IInputProps> = memo(({
     }, [])
 
     return (
-        <div className={style.input} onClick={handleClick}>
+        <div className={style.input} onClick={handleClick} title={(type !== 'password' && value) || ''}>
            <div className={cn(style.input__container)}>
                { placeholder && (
                    <div className={cn(style.input__placeholder, { [style.input__placeholder_toTop]: isFocused || value })}>
@@ -58,7 +60,7 @@ const Input: React.NamedExoticComponent<IInputProps> = memo(({
                    </div>
                )}
 
-               <InputMask mask={mask || ''} inputRef={handleSetInputRef} onBlur={handleBlur} onChange={handleChange} />
+               <InputMask type={type} mask={mask || ''} inputRef={handleSetInputRef} onBlur={handleBlur} onChange={handleChange} />
            </div>
             <div className={cn(style.input__underline, { [style.input__underline_active]: isFocused || value })} />
         </div>

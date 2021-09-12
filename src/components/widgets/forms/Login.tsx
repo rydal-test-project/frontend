@@ -1,16 +1,15 @@
 import React, {useState} from "react";
-import FormGroup from "../../ui/FormGroup";
 import {useInstance} from "react-ioc";
 import AuthService from "../../../services/auth";
-import {Input} from "../../ui";
 import {emailValidator, requiredValidator, useValidation} from "@validation";
+import {FormField, Input} from "@ui";
 
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const authService = useInstance(AuthService);
-  const { error, allowValidate, totalIsValid } = useValidation({
+  const { error, allowValidate, totalIsValid, isValid } = useValidation({
     email: {
       validators: [
           requiredValidator,
@@ -51,19 +50,16 @@ export default function Login() {
     <section className="login">
       <h1 className="login__title">Кто вы?</h1>
       <form className="login__form form">
-        <FormGroup>
-          <>
-            { error('email') }
-            <Input placeholder="Email" onChange={setEmail} />
-          </>
-        </FormGroup>
-        <FormGroup  >
-          <Input placeholder="Пароль" onChange={setPassword} />
-        </FormGroup>
-        <div className="login__buttons">
-          <button disabled={disable()} className="button button_primary" onClick={event => submitHandler(event)}>Попытаться войти</button>
-        </div>
+        <FormField isValid={isValid('email')} errorMessage={error('email')}>
+          <Input placeholder="Email" onChange={setEmail} />
+        </FormField>
+        <FormField isValid={isValid('password')} errorMessage={error('password')}>
+          <Input placeholder="Пароль" onChange={setPassword} type="password" />
+        </FormField>
       </form>
+      <div className="login__buttons">
+        <button disabled={disable()} className="button button_primary" onClick={event => submitHandler(event)}>Попытаться войти</button>
+      </div>
     </section>
   )
 }
