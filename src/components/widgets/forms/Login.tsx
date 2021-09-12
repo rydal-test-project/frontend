@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useInstance} from "react-ioc";
 import AuthService from "../../../services/auth";
 import {emailValidator, requiredValidator, useValidation} from "@validation";
-import {FormField, Input} from "@ui";
+import {Button, FormField, Input} from "@ui";
 
 
 export default function Login() {
@@ -58,7 +58,7 @@ export default function Login() {
         </FormField>
       </form>
       <div className="login__buttons">
-        <button disabled={disable()} className="button button_primary" onClick={event => submitHandler(event)}>Попытаться войти</button>
+        <Button disabled={disable()} onClick={event => submitHandler(event)}>Попытаться войти</Button>
       </div>
     </section>
   )

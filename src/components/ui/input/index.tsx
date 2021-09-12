@@ -1,6 +1,6 @@
 import React, {memo, MouseEvent, ReactNode, SyntheticEvent, useEffect, useState} from "react";
 import {IComponentProps} from "../../../common/types";
-import style from './style.module.scss'
+import style from './input.module.scss'
 import InputMask from 'react-input-mask';
 import cn from 'classnames';
 
