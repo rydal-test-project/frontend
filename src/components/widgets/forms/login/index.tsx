@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {useInstance} from "react-ioc";
-import AuthService from "../../../services/auth";
+import {AuthService} from "@services";
 import {emailValidator, requiredValidator, useValidation} from "@validation";
 import {Button, FormField, Input} from "@ui";
 
 
-export default function Login() {
+const LoginForm = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const authService = useInstance(AuthService);
@@ -31,11 +31,13 @@ export default function Login() {
 
     if (!totalIsValid()) { return }
 
-    authService.login({ email, password }).then(() => {
+    authService.login({ email, password })
+
+/*    authService.login({ email, password }).then(() => {
       authService.init();
     }).catch(() => {
       setPassword('');
-    });
+    });*/
   };
 
   const disable = () => {
@@ -62,4 +64,8 @@ export default function Login() {
       </div>
     </section>
   )
+}
+
+export {
+  LoginForm
 }

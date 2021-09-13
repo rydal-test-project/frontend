@@ -3,7 +3,7 @@ import {dictionary} from "../common/types";
 import {appStoreLogger} from "../debug";
 
 
-export default class AppStore {
+export class AppStore {
   @observable _pendingState = {} as dictionary<boolean>;
 
   constructor() {

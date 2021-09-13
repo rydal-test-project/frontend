@@ -1,24 +1,23 @@
 import React, {useEffect} from 'react';
+import {provider, useInstance} from 'react-ioc'
+import {Switch, Route} from 'react-router-dom'
+
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
-import {Switch, Route} from 'react-router-dom'
 import Index from "../views/Index";
-import Stores from "../stores";
 import About from "../views/About";
 import Interests from "../views/Interests";
 import Study from "../views/Study/Study";
-import {provider, useInstance} from 'react-ioc'
-import ModelsData from "../models";
-import AuthService from "../services/auth";
-import AppStore from "../stores/appStore";
+import {AuthStore, AppStore, Stores} from "@stores";
+import {AuthService} from "@services";
 
 
 const App: React.FC = () => {
   const authService = useInstance(AuthService);
 
-  useEffect(() => {
+/*  useEffect(() => {
     authService.init();
-  }, [authService]);
+  }, [authService]);*/
 
   return (
     <>
@@ -40,8 +39,7 @@ export default provider(
   /* stores */
   AppStore,
   Stores,
+  AuthStore,
   /* services */
   AuthService,
-  /* models */
-  ModelsData
 )(App);

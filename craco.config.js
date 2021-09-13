@@ -7,7 +7,13 @@ module.exports = {
         alias: {
             '@validation': resolvePath('./src/validation'),
             '@components': resolvePath('./src/components'),
+            '@stores': resolvePath('./src/stores'),
+            '@models': resolvePath('./src/models'),
+            '@adapters': resolvePath('./src/adapters'),
+            '@services': resolvePath('./src/services'),
+            '@requests': resolvePath('./src/requests'),
             '@ui': '@components/ui',
+            '@widgets': '@components/widgets'
         }
     },
 }

@@ -1,20 +1,17 @@
-import {Base} from "./base";
-import api from "../common/api";
-import {AxiosResponse} from "axios";
-import {loginResponse, userDataResponse} from "../common/types";
 import {inject} from "react-ioc";
-import AppStore from "../stores/appStore";
-import {pending} from "../constants";
-import {authServiceLogger} from "../debug/services";
-import ModelsData from "../models";
+
+import {Base} from "./base";
+import {AppStore, AuthStore} from "@stores";
+import {fetchLogin, ILoginFetchResponse} from "@requests";
 
 
-export default class AuthService extends Base {
+export class AuthService extends Base {
   @inject(AppStore) appStore!: AppStore;
-  @inject(ModelsData) modelData!: ModelsData;
+  @inject(AuthStore) authStore!: AuthStore;
 
-  login(data: { email: string, password: string }): Promise<AxiosResponse<loginResponse>> {
-    this.appStore.setPending(pending.LOGIN);
+  login(data: { email: string, password: string }): Promise<ILoginFetchResponse | null> {
+    return fetchLogin(data)
+/*    this.appStore.setPending(pending.LOGIN);
     authServiceLogger('login started');
 
     return api.post<loginResponse>('auth/login', data).then(res => {
@@ -25,10 +22,10 @@ export default class AuthService extends Base {
     }).finally(() => {
       this.appStore.unSetPending(pending.LOGIN);
       authServiceLogger('login finished');
-    });
+    });*/
   }
 
-  init(): Promise<AxiosResponse<userDataResponse>> | null {
+/*  init(): Promise<AxiosResponse<userDataResponse>> | null {
     if (localStorage.getItem('access_token')) {
       authServiceLogger('init started');
       this.appStore.setPending(pending.INIT_USER);
@@ -59,5 +56,5 @@ export default class AuthService extends Base {
     }
 
     return null
-  }
+  }*/
 }

@@ -1,8 +1,6 @@
 import {makeObservable} from "mobx";
 
-export class Base {
-
+export class BaseModel {
     constructor() {
     }
-
 }

@@ -27,6 +27,24 @@
       ],
       "@ui": [
         "src/components/ui"
+      ],
+      "@widgets": [
+        "src/components/widgets"
+      ],
+      "@stores": [
+        "src/stores"
+      ],
+      "@models": [
+        "src/models"
+      ],
+      "@adapters": [
+        "src/adapters"
+      ],
+      "@services": [
+        "src/services"
+      ],
+      "@requests": [
+        "src/requests"
       ]
     }
   },

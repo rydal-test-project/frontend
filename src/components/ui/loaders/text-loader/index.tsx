@@ -6,7 +6,7 @@ interface IProps {
   label?: string
 }
 
-export default function TextLoader({ label }: IProps) {
+const TextLoader = ({ label }: IProps) => {
   const [dotsCount, setDotsCount] = useState<number>(0);
 
   useEffect(() => {
@@ -21,4 +21,8 @@ export default function TextLoader({ label }: IProps) {
   return (
     <span>{label || 'Загружается'} {Array(dotsCount + 1).join('.')}</span>
   )
+}
+
+export {
+  TextLoader
 }
