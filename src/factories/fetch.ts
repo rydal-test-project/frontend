@@ -1,16 +1,17 @@
-import {BaseFactory} from "./base";
 import {Debugger} from "debug";
 import {AxiosResponse} from "axios";
+import {isArray} from "lodash";
 
-import {fetchLogger} from "../debug/fetch";
+import {BaseFactory} from "./base";
+import {fetchDebugger} from "@debug";
 import {BaseFetch} from "../requests/base";
-import {PendingStateStore} from "@stores";
+import {ServerActionModel} from "@models";
 
 
-export class FetchFactory <TData, TPayload> extends BaseFactory {
+export class FetchFactory<TData, TPayload> extends BaseFactory {
     fetchName: string
     logger?: Debugger
-    pendingStore?: PendingStateStore
+    serverActions: ServerActionModel[] = []
 
     constructor(fetchName: string) {
         super();
@@ -19,30 +20,32 @@ export class FetchFactory <TData, TPayload> extends BaseFactory {
         return this
     }
 
-    addLogger (name?: string) {
-        this.logger = fetchLogger.extend(name || this.fetchName)
+    addDebugger (name?: string) {
+        this.logger = fetchDebugger.extend(name || this.fetchName)
 
         return this
     }
-    addPending (pendingStore: PendingStateStore) {
-        this.pendingStore = pendingStore
+    addServerActions (serverActions: ServerActionModel | ServerActionModel[]) {
+        this.serverActions = isArray(serverActions) ? serverActions : [serverActions]
 
         return this
     }
 
     make(fetch: (payload: TPayload) => Promise<AxiosResponse<TData>>): (payload: TPayload) => Promise<TData | null> {
-        const { logger, pendingStore } = this
+        const { logger, serverActions } = this
         const newFetch = new BaseFetch<TData, TPayload>(fetch)
 
         newFetch.failureFetch = (e) => {
             logger && logger('failure %o', e)
-            pendingStore && pendingStore.setPending()
+            serverActions.forEach(serverAction => serverAction.setFailure(e))
         }
         newFetch.successFetch = (data) => {
             logger && logger('success %o', data)
+            serverActions.forEach(serverAction => serverAction.setSuccess())
         }
         newFetch.beforeFetch = () => {
             logger && logger('started...')
+            serverActions.forEach(serverAction => serverAction.setPending())
         }
         newFetch.finallyFetch = () => {
             logger && logger('finished...')

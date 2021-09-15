@@ -1,14 +1,24 @@
 import {makeObservable, observable} from "mobx";
-import {UserModel} from "@models";
-import {PendingStateStore} from "./common";
+import {ServerActionModel, UserModel} from "@models";
+import {BaseStore} from "./base";
 
-export class AuthStore {
-    @observable
+
+export class AuthStore extends BaseStore {
+    @observable.ref
     user?: UserModel
-    pendingState: PendingStateStore
+
+    @observable.ref
+    serverActions: {
+        login: ServerActionModel,
+        getUser: ServerActionModel
+    }
 
     constructor() {
+        super();
         makeObservable(this);
-        this.pendingState = new PendingStateStore()
+        this.serverActions = {
+            login: new ServerActionModel(),
+            getUser: new ServerActionModel(),
+        }
     }
 }

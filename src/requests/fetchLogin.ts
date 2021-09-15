@@ -1,5 +1,6 @@
 import {FetchFactory} from "../factories";
 import api from "../common/api";
+import {stores} from "@stores";
 
 
 export interface ILoginFetchResponse {
@@ -10,9 +11,9 @@ export interface ILoginFetchResponse {
 }
 export interface ILoginFetchParams { email: string; password: string }
 
-export const fetchLogin = new FetchFactory<ILoginFetchResponse, ILoginFetchParams>('login').addLogger().make(payload =>
-    api.get('auth/login', {
-        data: payload
-    })
+export const fetchLogin = new FetchFactory<ILoginFetchResponse, ILoginFetchParams>('login')
+    .addDebugger()
+    .addServerActions(stores.auth.serverActions.login)
+    .make(payload => api.post('auth/login', payload)
 )
 

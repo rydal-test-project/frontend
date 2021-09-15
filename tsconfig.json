@@ -45,6 +45,15 @@
       ],
       "@requests": [
         "src/requests"
+      ],
+      "@constants": [
+        "src/constants"
+      ],
+      "@components": [
+        "src/components"
+      ],
+      "@debug": [
+        "src/debug"
       ]
     }
   },

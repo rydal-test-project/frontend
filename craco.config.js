@@ -12,6 +12,8 @@ module.exports = {
             '@adapters': resolvePath('./src/adapters'),
             '@services': resolvePath('./src/services'),
             '@requests': resolvePath('./src/requests'),
+            '@constants': resolvePath('./src/constants'),
+            '@debug': resolvePath('./src/debug'),
             '@ui': '@components/ui',
             '@widgets': '@components/widgets'
         }

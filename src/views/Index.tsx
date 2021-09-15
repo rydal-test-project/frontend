@@ -4,14 +4,13 @@ import {useInstance} from "react-ioc";
 
 import {TextLoader} from "@ui";
 import {LoginForm} from "@widgets";
-import {AuthStore, Stores} from "@stores";
-import {pending} from "../constants";
+import {AuthStore} from "@stores";
 
 
 const Index: React.FC = () => {
-  const { user, pendingState } = useInstance(AuthStore);
-  const { app } = useInstance(Stores);
-  const showLoad = pendingState.isPending
+  const { user, serverActions } = useInstance(AuthStore);
+  const showLoad = serverActions.login.isPending
+
   const renderUserInfo = () => {
 
     return (
@@ -28,7 +27,7 @@ const Index: React.FC = () => {
   return (
     <div className="container container_full-height">
       {
-        app.isPending(pending.INIT_USER) || showLoad ? renderUserInfo() : (<LoginForm/>)
+        serverActions.getUser.isPending || showLoad ? renderUserInfo() : (<LoginForm/>)
       }
     </div>
   )

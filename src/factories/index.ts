@@ -1,1 +1,1 @@
-export * from './FetchFactory'
+export * from './fetch'

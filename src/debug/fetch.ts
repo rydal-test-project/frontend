@@ -1,9 +1,9 @@
 import debug from "debug";
 
 
-const fetchLogger = debug('fetch');
+const fetchDebugger = debug('fetch');
 
 
 export {
-    fetchLogger
+    fetchDebugger
 }
