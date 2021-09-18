@@ -14,19 +14,9 @@ interface IProps extends IComponentProps{
 const AboutCard: React.FC<IProps> = forwardRef((props: IProps) => {
     const { text, title, className, isSkeleton } = props
 
-    const renderTitle = () => {
-        if (isSkeleton) {
-            return (
-                <SkeletonText/>
-            )
-        }
-
-        return title
-    }
-
     return (
         <Card className={cn([css.card, className])}>
-            <CardHead className={css.card__head} text={renderTitle()}/>
+            <CardHead className={css.card__head} text={title} isSkeleton={isSkeleton}/>
             <div className={css.card__body}>
                 {
                     isSkeleton ? (

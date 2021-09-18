@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {createRef, useRef, useState} from "react";
 import $ from "jquery";
 
 import {Card} from "@ui";
 import programing from "../assets/img/programing.png";
+import InterestCard from "../components/page-parts/interests/card";
 
 
 type interest = {
@@ -36,10 +37,12 @@ export default function Interests () {
       list: ['Microchips and microprocessors have considerably', 'Components required', 'Microchips', 'Have considerably']
     }
   ]);
-  const cards = Array(interests.length);
-  const clickHandler = (event: React.MouseEvent<HTMLLIElement>, card: HTMLDivElement) => {
+  const cards = useRef(interests.map(() => createRef<HTMLDivElement>()));
+  const clickHandler = (event: React.MouseEvent<HTMLLIElement>, card: HTMLDivElement | null) => {
     event.preventDefault();
-    window.scrollTo({ top: $(card).position()?.top as number - 10, behavior: 'smooth'})
+    if (card) {
+      window.scrollTo({ top: $(card).position()?.top as number - 10, behavior: 'smooth'})
+    }
   };
 
   return (
@@ -49,7 +52,7 @@ export default function Interests () {
           <nav className="interests__nav">
             <ul className="interests__nav-list">
               {interests.map((interest, idx) => (
-                <li className="interests__nav-list-item" key={idx} onClick={event => clickHandler(event, cards[idx])}>
+                <li className="interests__nav-list-item" key={idx} onClick={event => clickHandler(event, cards.current[idx].current)}>
                   <a className="interests__nav-link" href={`#${interest.id}`}>{interest.title}</a>
                 </li>
               ))}
@@ -57,7 +60,15 @@ export default function Interests () {
           </nav>
         </section>
         <section className="section">
-          <div className="interests__cards-container">          </div>
+          <div className="interests__cards-container">
+            {interests.map((interest, idx) => (
+                <InterestCard key={idx} ref={cards.current[idx]}
+                              imagePath={interest.image_path}
+                              title={interest.title} text={interest.text}
+                              list={interest.list}
+                />
+            ))}
+          </div>
         </section>
       </div>
     </div>

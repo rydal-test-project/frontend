@@ -1,7 +1,8 @@
 import {Debugger} from "debug";
+import {isArray} from "lodash";
+
 import {fetchDebugger} from "@debug";
 import {ServerActionModel} from "@models";
-import {isArray} from "lodash";
 
 
 const adaptOptions = (options: IServiceFetchDecoratorOptions, methodName: string): AdaptedOptions => {

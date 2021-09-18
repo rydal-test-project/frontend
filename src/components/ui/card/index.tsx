@@ -8,7 +8,7 @@ import {IComponentProps} from "@specs";
 
 interface IProps extends IComponentProps {
 }
-const Card: React.ForwardRefExoticComponent<IProps> = forwardRef((props: IProps, ref: React.Ref<HTMLDivElement>) => {
+const Card: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement> & IProps> = forwardRef<HTMLDivElement, IComponentProps>((props: IProps, ref) => {
   const { className, children } = props
 
   return (
