@@ -1,2 +1,2 @@
-export * from './fetchLogin'
+export * from './auth'
 export * from './base'

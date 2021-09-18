@@ -54,6 +54,9 @@
       ],
       "@debug": [
         "src/debug"
+      ],
+      "@utils": [
+        "src/utils"
       ]
     }
   },

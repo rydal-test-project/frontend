@@ -1,3 +1,5 @@
+import {IGetUserFetchResponseData} from "@requests";
+
 export interface IAdaptedUser {
     id: number;
     phoneNumber: string;
@@ -10,16 +12,18 @@ export interface IAdaptedGroup {
 
 }
 export interface IAdaptedFio {
-
+    name: string
+    secondName: string
+    lastName: string
 }
 export interface IAdaptedDepartment {
 
 }
 
 export class UserAdapter {
-    static adaptUser (): IAdaptedUser {
+    static adaptUser (payload: IGetUserFetchResponseData): IAdaptedUser {
         return {
-            fio: this.adaptFio(),
+            fio: this.adaptFio(payload),
             group: this.adaptGroup(),
             department: this.adaptDepartment(),
             id: 0,
@@ -33,9 +37,11 @@ export class UserAdapter {
 
         }
     }
-    static adaptFio (): IAdaptedFio {
+    static adaptFio (payload: IGetUserFetchResponseData): IAdaptedFio {
         return {
-
+            name: payload.data.name,
+            lastName: payload.data.patronymic,
+            secondName: payload.data.surname,
         }
     }
     static adaptDepartment (): IAdaptedDepartment {

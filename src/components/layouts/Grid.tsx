@@ -14,7 +14,7 @@ const Grid: React.FC<props> = ({ items, hasMore, next }: props) => {
   const columnHeight = 10;
   const [ columnsHeights, setColumnsHeights ] = useState<number[]>(Array(items.length).fill(1));
   const calculateSize = () => {
-    itemsRefs.current.map((itemRef, idx) => {
+    itemsRefs.current.forEach((itemRef, idx) => {
       const itemHeight = Math.floor(itemsRefs.current[idx].clientHeight / 10) * 10;
 
       columnsHeights[idx] = Math.floor((itemHeight / columnHeight))

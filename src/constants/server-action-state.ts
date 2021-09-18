@@ -1,6 +1,5 @@
 export enum ServerActionState {
-    PENDING = 'PENDING',
+    IN_PENDING = 'IN_PENDING',
     NONE = 'NONE',
-    SUCCESS = 'SUCCESS',
-    FAILURE = 'FAILURE'
+    FINISHED = 'FINISHED',
 }

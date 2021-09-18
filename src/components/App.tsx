@@ -1,5 +1,5 @@
-import React from 'react';
-import {provider, toFactory} from 'react-ioc'
+import React, {useEffect} from 'react';
+import {provider, toFactory, useInstance} from 'react-ioc'
 import {Switch, Route} from 'react-router-dom'
 
 import {AppStore, AuthStore, stores, Stores} from "@stores";
@@ -14,6 +14,17 @@ import Study from "../views/Study/Study";
 
 
 const App: React.FC = () => {
+    const authService = useInstance(AuthService)
+    const auth = useInstance(AuthStore)
+
+    useEffect(() => {
+        if (localStorage.getItem('access_token')) {
+            authService.getUser()
+        } else {
+            auth.serverActions.getUser.setFinished()
+        }
+    }, [auth.serverActions.getUser, authService])
+
   return (
     <>
       <Header/>

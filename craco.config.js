@@ -14,6 +14,7 @@ module.exports = {
             '@requests': resolvePath('./src/requests'),
             '@constants': resolvePath('./src/constants'),
             '@debug': resolvePath('./src/debug'),
+            '@utils': resolvePath('./src/utils'),
             '@ui': '@components/ui',
             '@widgets': '@components/widgets'
         }

@@ -2,14 +2,16 @@ import React, {useState} from "react";
 import {useInstance} from "react-ioc";
 import {AuthService} from "@services";
 import {emailValidator, requiredValidator, useValidation} from "@validation";
-import {Button, FormField, Input} from "@ui";
+import {Button, FormField, Input, TextLoader} from "@ui";
+import {AuthStore} from "@stores";
 
 
 const LoginForm = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const authService = useInstance(AuthService);
-  const { error, allowValidate, totalIsValid, isValid } = useValidation({
+  const auth = useInstance(AuthStore);
+  const { error, allowValidate, totalIsValid, isValid, reset } = useValidation({
     email: {
       validators: [
           requiredValidator,
@@ -31,13 +33,11 @@ const LoginForm = () => {
 
     if (!totalIsValid()) { return }
 
-    authService.login({ email, password })
-
-/*    authService.login({ email, password }).then(() => {
-      authService.init();
-    }).catch(() => {
-      setPassword('');
-    });*/
+    authService.login({ email, password }).then(() => {
+      setPassword('')
+      reset()
+      authService.getUser()
+    })
   };
 
   const disable = () => {
@@ -46,6 +46,12 @@ const LoginForm = () => {
     if (res === null) { return false }
 
     return !res
+  }
+
+  if (auth.serverActions.login.isPending) {
+    return (
+        <TextLoader/>
+    )
   }
 
   return (

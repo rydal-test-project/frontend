@@ -1,60 +1,54 @@
 import {inject} from "react-ioc";
 
 import {Base} from "./base";
-import {AppStore, AuthStore} from "@stores";
-import {fetchLogin, ILoginFetchResponse} from "@requests";
+import {fetchGetUser, fetchLogin} from "@requests";
+import {AuthStore, stores} from "@stores";
+import {UserModel} from "@models";
+import {UserAdapter} from "@adapters";
+import {AxiosError} from "axios";
+import {serviceFetch} from "@utils";
 
 
 export class AuthService extends Base {
-  @inject(AppStore) appStore!: AppStore;
   @inject(AuthStore) authStore!: AuthStore;
 
-  login(data: { email: string, password: string }): Promise<ILoginFetchResponse | null> {
-    return fetchLogin(data)
-/*    this.appStore.setPending(pending.LOGIN);
-    authServiceLogger('login started');
+  @serviceFetch({
+    serverAction: stores.auth.serverActions.login
+  })
+  login(params: { email: string, password: string }) {
+    let res = fetchLogin(params)
 
-    return api.post<loginResponse>('auth/login', data).then(res => {
-      localStorage.setItem('access_token', res.data.access_token);
-      localStorage.setItem('refresh_token', res.data.refresh_token);
+    res.then(res => {
+      if (res.data) {
+        localStorage.setItem('access_token', res.data.access_token);
+        localStorage.setItem('refresh_token', res.data.refresh_token);
+      }
+    }).catch(e => {
+      console.log(e)
 
-      return res;
-    }).finally(() => {
-      this.appStore.unSetPending(pending.LOGIN);
-      authServiceLogger('login finished');
-    });*/
+      if ((e as AxiosError)?.response) {
+        localStorage.removeItem('access_token');
+      }
+    })
+
+    return res
   }
 
-/*  init(): Promise<AxiosResponse<userDataResponse>> | null {
-    if (localStorage.getItem('access_token')) {
-      authServiceLogger('init started');
-      this.appStore.setPending(pending.INIT_USER);
+  @serviceFetch({
+    serverAction: stores.auth.serverActions.getUser
+  })
+  getUser() {
+    let res = fetchGetUser({})
 
-      const res = api.get<userDataResponse>('auth/user').then(res => {
-        const data = res.data.data;
+    res.then(res => {
+      if (res.data) {
+        this.authStore.user = new UserModel(UserAdapter.adaptUser(res.data))
+      }
+    }).catch(e => {
+      console.log(e)
 
-        authServiceLogger('accepted');
+    })
 
-        if (data) {
-          this.modelData.user.setInfo(data);
-        }
-
-        return res;
-      }).catch(error => {
-        if (error?.response) {
-          localStorage.removeItem('access_token');
-        }
-
-        return error;
-      });
-
-      res.finally(() => {
-        this.appStore.unSetPending(pending.INIT_USER);
-      });
-
-      return res;
-    }
-
-    return null
-  }*/
+    return res
+  }
 }
