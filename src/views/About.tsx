@@ -3,7 +3,7 @@ import Card from "../components/ui/Card";
 import {useQuery} from "@apollo/client";
 import {GET_ABOUTS} from "../gq/about";
 import Grid from "../components/layouts/Grid";
-import {gqResponseWithPaginate} from "../common/types";
+import {gqResponseWithPaginate} from "@specs";
 
 
 type aboutInfo = {

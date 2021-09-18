@@ -4,14 +4,14 @@ import App from './components/App';
 import './assets/scss/index.scss';
 import {BrowserRouter} from 'react-router-dom';
 import {ApolloProvider} from "@apollo/client";
-import apollo from "./common/apollo";
-import appLogger from "./debug/app";
-import {env} from "./constants";
+import apollo from "./api/apollo";
+import {appDebugger} from "@debug";
+import {env} from "@constants";
 
 
 localStorage.debug = env.USE_DEBUG ? '*' : '';
 
-appLogger('booting...');
+appDebugger('booting...');
 
 require('dotenv').config();
 

@@ -1,4 +1,4 @@
-import api from "../../common/api";
+import {api} from "@api";
 
 
 export interface ILoginFetchResponseData {
@@ -7,7 +7,10 @@ export interface ILoginFetchResponseData {
     token_type: string;
     expires_in: number
 }
-export interface ILoginFetchParams { email: string; password: string }
+export interface ILoginFetchData { email: string; password: string }
 
-export const fetchLogin = (payload: ILoginFetchParams) => api.post<ILoginFetchResponseData>('auth/login', payload)
+export const fetchLogin = (data: ILoginFetchData) => api.post<ILoginFetchResponseData, ILoginFetchData>({
+    url: 'auth/login',
+    data
+})
 

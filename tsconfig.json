@@ -57,6 +57,12 @@
       ],
       "@utils": [
         "src/utils"
+      ],
+      "@api": [
+        "src/api"
+      ],
+      "@specs": [
+        "src/specs"
       ]
     }
   },

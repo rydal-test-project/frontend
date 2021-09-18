@@ -1,4 +1,7 @@
 import axios from 'axios'
+import { get } from './get'
+import { post } from './post'
+
 
 const inst = axios.create({
   baseURL: '/api'
@@ -11,4 +14,15 @@ inst.interceptors.request.use(config => {
   }
 });
 
-export default inst
+const api = {
+  get,
+  post
+}
+
+
+export {
+  api,
+  inst,
+  get,
+  post
+}

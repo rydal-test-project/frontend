@@ -15,8 +15,10 @@ module.exports = {
             '@constants': resolvePath('./src/constants'),
             '@debug': resolvePath('./src/debug'),
             '@utils': resolvePath('./src/utils'),
+            '@api': resolvePath('./src/api'),
+            '@specs': resolvePath('./src/specs'),
             '@ui': '@components/ui',
-            '@widgets': '@components/widgets'
+            '@widgets': '@components/widgets',
         }
     },
 }

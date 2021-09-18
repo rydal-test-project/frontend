@@ -39,9 +39,9 @@ export class UserAdapter {
     }
     static adaptFio (payload: IGetUserFetchResponseData): IAdaptedFio {
         return {
-            name: payload.data.name,
-            lastName: payload.data.patronymic,
-            secondName: payload.data.surname,
+            name: payload.name,
+            lastName: payload.patronymic,
+            secondName: payload.surname,
         }
     }
     static adaptDepartment (): IAdaptedDepartment {

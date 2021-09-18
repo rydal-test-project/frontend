@@ -1,6 +1,8 @@
 import debug from "debug";
 
 
-const appLogger = debug('app');
+const appDebugger = debug('app');
 
-export default appLogger
+export {
+    appDebugger
+}

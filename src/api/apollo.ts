@@ -1,5 +1,5 @@
 import {ApolloClient, InMemoryCache} from "@apollo/client";
-import {env} from "../constants";
+import {env} from "@constants";
 
 
 export default new ApolloClient({

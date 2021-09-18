@@ -1,4 +1,4 @@
-import {dictionary} from "../common/types";
+import {dictionary} from "@specs";
 
 
 export const env = {

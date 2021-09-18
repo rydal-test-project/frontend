@@ -5,7 +5,6 @@ import {fetchGetUser, fetchLogin} from "@requests";
 import {AuthStore, stores} from "@stores";
 import {UserModel} from "@models";
 import {UserAdapter} from "@adapters";
-import {AxiosError} from "axios";
 import {serviceFetch} from "@utils";
 
 
@@ -18,15 +17,13 @@ export class AuthService extends Base {
   login(params: { email: string, password: string }) {
     let res = fetchLogin(params)
 
-    res.then(res => {
-      if (res.data) {
-        localStorage.setItem('access_token', res.data.access_token);
-        localStorage.setItem('refresh_token', res.data.refresh_token);
+    res.then(data => {
+      if (data) {
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
       }
     }).catch(e => {
-      console.log(e)
-
-      if ((e as AxiosError)?.response) {
+      if (e.response) {
         localStorage.removeItem('access_token');
       }
     })
@@ -40,13 +37,10 @@ export class AuthService extends Base {
   getUser() {
     let res = fetchGetUser({})
 
-    res.then(res => {
-      if (res.data) {
-        this.authStore.user = new UserModel(UserAdapter.adaptUser(res.data))
+    res.then(data => {
+      if (data) {
+        this.authStore.user = new UserModel(UserAdapter.adaptUser(data))
       }
-    }).catch(e => {
-      console.log(e)
-
     })
 
     return res
