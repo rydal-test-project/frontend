@@ -1,0 +1,12 @@
+@import "@scss/base/variables";
+@import "@scss/mixins";
+
+
+.head {
+  margin-bottom: $unit;
+
+  &__title {
+    margin-bottom: 0;
+    font-size: 1.3em;
+  }
+}

@@ -1,0 +1,11 @@
+@import "@scss/base/variables";
+@import "@scss/mixins";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-primary-light-alpha;
+  padding: $unit * 5 $unit * 5;
+  border-radius: 2px;
+  border: 1px solid $color-primary;
+}

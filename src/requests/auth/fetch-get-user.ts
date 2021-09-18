@@ -3,11 +3,18 @@ import {api} from "@api";
 
 export interface IGetUserFetchResponseData {
     id: number,
-    phoneNumber: string,
+    phone_number: string,
     email: string,
     patronymic: string,
     surname: string,
     name: string,
+    department: {
+        created_at: string;
+        id: number;
+        name: string;
+        updated_at: string;
+    }
+
 }
 export interface IGetUserFetchParams {}
 

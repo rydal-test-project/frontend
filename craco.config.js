@@ -19,6 +19,7 @@ module.exports = {
             '@specs': resolvePath('./src/specs'),
             '@ui': '@components/ui',
             '@widgets': '@components/widgets',
+            '@scss': resolvePath('./src/assets/scss'),
         }
     },
 }

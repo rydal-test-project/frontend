@@ -1,0 +1,5 @@
+@import "../animations/skeleton";
+
+@mixin skeletonAnimation {
+  animation: skeleton 1.5s infinite linear forwards;
+}

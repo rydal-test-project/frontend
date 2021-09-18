@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import Card from "../components/ui/Card";
-import programing from "../assets/img/programing.png";
 import $ from "jquery";
+
+import {Card} from "@ui";
+import programing from "../assets/img/programing.png";
 
 
 type interest = {
@@ -56,28 +57,7 @@ export default function Interests () {
           </nav>
         </section>
         <section className="section">
-          <div className="interests__cards-container">
-            {interests.map((interest, idx) => (
-              <Card classes={['interests__card']} key={idx}
-                    imageWithContent
-                    imageWithContentUseChildren
-                    xl
-                    imagePath={interest.image_path}
-                    title={interest.title} text={interest.text}
-                    imageAdditionalContentSlot={() => (
-                      <div className="interests__card-list-container">
-                        <ul className="interests__card-list">
-                          {interest.list.map((item, idx) => (
-                            <li key={idx} className="interests__card-list-item">
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-              />
-            ))}
-          </div>
+          <div className="interests__cards-container">          </div>
         </section>
       </div>
     </div>

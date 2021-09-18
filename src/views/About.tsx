@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
-import Card from "../components/ui/Card";
 import {useQuery} from "@apollo/client";
 import {GET_ABOUTS} from "../gq/about";
 import Grid from "../components/layouts/Grid";
 import {gqResponseWithPaginate} from "@specs";
+import {AboutCard} from "../components/page-parts/about/card";
 
 
 type aboutInfo = {
@@ -13,13 +13,26 @@ type aboutInfo = {
 export default function About () {
   const [ cards, setCards ] = useState<aboutInfo[]>([]);
   const [ page, setPage ] = useState<number>(1);
-  const { data, fetchMore } = useQuery<{ abouts: gqResponseWithPaginate<aboutInfo> }>(GET_ABOUTS, {
+  const { data, fetchMore, loading } = useQuery<{ abouts: gqResponseWithPaginate<aboutInfo> }>(GET_ABOUTS, {
     variables: { page }
   });
+  const showSkeleton = !cards.length && loading
   const loadNext = () => {
     setPage(prevState => prevState + 1)
   };
 
+  const renderCards = () => {
+    if (showSkeleton) {
+      return Array(7).fill(1).map((_m, idx) => (
+          <AboutCard className="about__card" key={idx} isSkeleton />
+      ))
+    }
+
+    return cards.map((cardInfo, idx) => (
+            <AboutCard className="about__card" key={idx} text={cardInfo.text} title={cardInfo.title}/>
+        )
+    )
+  }
   useEffect(() => {
     if (fetchMore) {
       fetchMore({ variables: page })
@@ -36,9 +49,7 @@ export default function About () {
   return (
       <div className="container">
         <div className="about">
-          <Grid items={cards.map((cardInfo, idx) => (<Card classes={['about__card']} key={idx} text={cardInfo.text} title={cardInfo.title}/>))}
-                next={loadNext} hasMore={data?.abouts.paginatorInfo.hasMorePages}
-          />
+          <Grid items={renderCards()} next={loadNext} hasMore={data?.abouts.paginatorInfo.hasMorePages} />
         </div>
       </div>
   )

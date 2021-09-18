@@ -7,15 +7,15 @@ import {observable} from "mobx";
 
 export class UserModel extends BaseModel {
     readonly id: number;
-    @observable.struct
+    @observable.ref
     fio: FioModel;
-    @observable.struct
+    @observable.ref
     group: GroupModel;
-    @observable.struct
+    @observable.ref
     department: DepartmentModel;
-    @observable
+    @observable.struct
     email: string;
-    @observable
+    @observable.struct
     phoneNumber: string;
 
     constructor(payload: IAdaptedUser) {

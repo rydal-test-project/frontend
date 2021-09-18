@@ -16,9 +16,9 @@ const Index: React.FC = () => {
     return (
       <section className="user-info">
         <div className="user-info__container container">
-          <h1 className="user-info__fio">{ showLoad ? (<TextLoader label="Обработка"/>) : user?.fio.lastName }</h1>
-          <h2 className="user-info__department">{ showLoad ? (<TextLoader label="Обработка"/>) : '' }</h2>
-          <h2 className="user-info__group">{ showLoad ? (<TextLoader label="Обработка"/>) : '' }</h2>
+          <h1 className="user-info__fio">{ showLoad ? (<TextLoader label="Обработка"/>) : user?.fio.fullFio }</h1>
+          <h2 className="user-info__department">{ showLoad ? (<TextLoader label="Обработка"/>) : user?.department.name }</h2>
+          <h2 className="user-info__group">{ showLoad ? (<TextLoader label="Обработка"/>) : user?.group.name }</h2>
         </div>
       </section>
     )
