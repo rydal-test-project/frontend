@@ -15,7 +15,6 @@ interface IProps extends IComponentProps {
 }
 const InterestCard: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement> & IProps> = forwardRef<HTMLDivElement, IProps>((props: IProps, ref) => {
     const { text, title, imagePath, className, isSkeleton: isSkeleton, list } = props
-    const card = useRef<HTMLDivElement>(null)
     const renderBody: () => React.ReactElement = () => {
         return (
             <div className={css.card__body}>
@@ -37,7 +36,7 @@ const InterestCard: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivE
     };
 
     return (
-        <Card className={cn([css.card, className])} ref={card}>
+        <Card className={cn([css.card, className])} ref={ref}>
             <CardHead className={css.card__head} text={title} isSkeleton={isSkeleton} />
             {renderBody()}
         </Card>

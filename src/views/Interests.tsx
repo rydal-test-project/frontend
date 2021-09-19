@@ -1,7 +1,6 @@
 import React, {createRef, useRef, useState} from "react";
 import $ from "jquery";
 
-import {Card} from "@ui";
 import programing from "../assets/img/programing.png";
 import InterestCard from "../components/page-parts/interests/card";
 
@@ -40,6 +39,7 @@ export default function Interests () {
   const cards = useRef(interests.map(() => createRef<HTMLDivElement>()));
   const clickHandler = (event: React.MouseEvent<HTMLLIElement>, card: HTMLDivElement | null) => {
     event.preventDefault();
+
     if (card) {
       window.scrollTo({ top: $(card).position()?.top as number - 10, behavior: 'smooth'})
     }
@@ -51,23 +51,27 @@ export default function Interests () {
         <section className="section">
           <nav className="interests__nav">
             <ul className="interests__nav-list">
-              {interests.map((interest, idx) => (
-                <li className="interests__nav-list-item" key={idx} onClick={event => clickHandler(event, cards.current[idx].current)}>
-                  <a className="interests__nav-link" href={`#${interest.id}`}>{interest.title}</a>
-                </li>
-              ))}
+              {
+                interests.map((interest, idx) => (
+                    <li className="interests__nav-list-item" key={idx} onClick={event => clickHandler(event, cards.current[idx].current)}>
+                      <a className="interests__nav-link" href={`#${interest.id}`}>{interest.title}</a>
+                    </li>
+                ))
+              }
             </ul>
           </nav>
         </section>
         <section className="section">
           <div className="interests__cards-container">
-            {interests.map((interest, idx) => (
-                <InterestCard key={idx} ref={cards.current[idx]}
-                              imagePath={interest.image_path}
-                              title={interest.title} text={interest.text}
-                              list={interest.list}
-                />
-            ))}
+            {
+              interests.map((interest, idx) => (
+                  <InterestCard key={idx} ref={cards.current[idx]}
+                                imagePath={interest.image_path}
+                                title={interest.title} text={interest.text}
+                                list={interest.list}
+                  />
+              ))
+            }
           </div>
         </section>
       </div>
