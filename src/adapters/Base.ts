@@ -1,5 +1,6 @@
 import {dictionary} from "@specs";
 
+
 class BaseAdapter {
     static adaptModelDates ({ updated_at, created_at }: { created_at: string, updated_at: string } | dictionary<any>) {
         return {

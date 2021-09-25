@@ -1,9 +1,9 @@
-import React, {forwardRef, ReactNode, useRef} from "react";
+import React, {forwardRef, ReactNode} from "react";
 import cn from "classnames"
 
 import {IComponentProps} from "@specs";
 import css from "./interest.module.scss";
-import {Card, CardHead} from "@ui";
+import {Card, CardHead, SkeletonImage, SkeletonText} from "@ui";
 
 
 interface IProps extends IComponentProps {
@@ -14,23 +14,48 @@ interface IProps extends IComponentProps {
     list: string[]
 }
 const InterestCard: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement> & IProps> = forwardRef<HTMLDivElement, IProps>((props: IProps, ref) => {
-    const { text, title, imagePath, className, isSkeleton: isSkeleton, list } = props
+    const { text, title, imagePath, className, isSkeleton, list } = props
+
+    const renderListItem = (item: ReactNode, idx: number) => (
+        <li key={idx} className={css.additionalContent__listItem}>
+            {
+                isSkeleton ? <SkeletonText className={css.additionalContent__listItemSkeleton} /> : item
+            }
+        </li>
+    )
+
+    const renderImage = () => {
+      return !isSkeleton ? (
+          <img className={css.card__image} src={imagePath} alt={title}/>
+      ) : (
+          <SkeletonImage className={css.card__imageSkeleton} />
+      )
+    }
+
     const renderBody: () => React.ReactElement = () => {
         return (
             <div className={css.card__body}>
                 <div className={css.card__imageContainer}>
-                    <img className={css.card__image} src={imagePath} alt={title}/>
+                    {renderImage()}
                     <div className={cn([css.card__imageAdditionalContent, css.additionalContent])}>
                         <ul className={css.additionalContent__list}>
-                                {list.map((item, idx) => (
-                                    <li key={idx} className={css.additionalContent__listItem}>
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
+                            {
+                                isSkeleton ?
+                                    Array(3).fill(1).map((_, idx) => renderListItem(<SkeletonText/>, idx))
+                                    :
+                                    list.map(renderListItem)
+                            }
+                        </ul>
                     </div>
                 </div>
-                <p className={css.card__text}>{props.text}</p>
+                {
+                    isSkeleton ? (
+                        <>
+                            <SkeletonText/>
+                            <SkeletonText/>
+                        </>
+                    ) : <p className={css.card__text}>{text}</p>
+                }
             </div>
         )
     };

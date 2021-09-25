@@ -67,6 +67,7 @@ export default function Interests () {
               interests.map((interest, idx) => (
                   <InterestCard key={idx} ref={cards.current[idx]}
                                 imagePath={interest.image_path}
+                                isSkeleton={false}
                                 title={interest.title} text={interest.text}
                                 list={interest.list}
                   />

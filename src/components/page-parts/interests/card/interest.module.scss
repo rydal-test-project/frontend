@@ -16,10 +16,7 @@
   &__head {
     font-size: 2em;
     text-align: center;
-
-    h3 {
-      margin-bottom: $unit * 5;
-    }
+    margin-bottom: $unit * 5;
   }
 
   &__imageContainer {
@@ -32,7 +29,11 @@
   &__image {
     border: 20px solid $color-secondary-alpha;
 
-    @include wh(300px);
+    &Skeleton {
+      max-width: 300px;
+      width: 100%;
+      height: 300px;
+    }
 
     &AdditionalContent {
       margin-left: $unit * 3;
@@ -46,9 +47,13 @@
   align-items: center;
 
   &__list {
+    flex: 1 1 auto;
 
     &Item {
       margin-bottom: $unit * 2;
+
+      &Skeleton {
+      }
 
     }
   }

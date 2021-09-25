@@ -1,0 +1,7 @@
+@import "@scss/base/variables";
+@import "@scss/mixins";
+
+.image {
+  background-color: $color-primary-alpha;
+  @include skeletonAnimation;
+}
