@@ -4,11 +4,12 @@ import {useInstance} from "react-ioc";
 
 import {TextLoader} from "@ui";
 import {LoginForm} from "@widgets";
-import {AuthStore} from "@stores";
+import {AuthStore, UiStore} from "@stores";
 
 
 const Index: React.FC = () => {
   const { user, serverActions } = useInstance(AuthStore);
+  const ui = useInstance(UiStore);
   const showLoad = serverActions.getUser.isPending
 
   const renderUserInfo = () => {
@@ -23,6 +24,8 @@ const Index: React.FC = () => {
       </section>
     )
   };
+
+  console.log(ui.isXs)
 
   return (
     <div className="container container_full-height">

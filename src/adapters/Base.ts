@@ -1,4 +1,4 @@
-import {dictionary} from "@specs";
+import { dictionary } from "@specs";
 
 
 class BaseAdapter {

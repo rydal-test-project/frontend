@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {provider, toFactory, useInstance} from 'react-ioc'
 import {Switch, Route} from 'react-router-dom'
 
-import {AppStore, AuthStore, stores, Stores} from "@stores";
+import {AuthStore, stores, Stores, UiStore} from "@stores";
 import {AuthService} from "@services";
 
 import Header from "./layouts/Header";
@@ -11,11 +11,14 @@ import Index from "../views/Index";
 import About from "../views/About";
 import Interests from "../views/Interests";
 import Study from "../views/Study/Study";
+import {throttle} from "lodash";
+import {ROUTE_INDEX, ROUTE_INTERESTS, ROUTE_STUDY} from "@constants";
 
 
 const App: React.FC = () => {
     const authService = useInstance(AuthService)
     const auth = useInstance(AuthStore)
+    const ui = useInstance(UiStore)
 
     useEffect(() => {
         if (localStorage.getItem('access_token')) {
@@ -25,15 +28,25 @@ const App: React.FC = () => {
         }
     }, [auth.serverActions.getUser, authService])
 
+    useEffect(() => {
+        const dandleResize = throttle(ui.updateSize, 100);
+
+        window.addEventListener('resize', dandleResize);
+
+        return () => {
+            window.removeEventListener('resize', dandleResize);
+        }
+    }, [ui])
+
   return (
     <>
       <Header/>
       <main className="main">
         <Switch>
           <Route exact path="/" component={Index}/>
-          <Route path="/about" component={About}/>
-          <Route path="/interests" component={Interests}/>
-          <Route path="/study" component={Study}/>
+          <Route path={ROUTE_INDEX} component={About}/>
+          <Route path={ROUTE_INTERESTS} component={Interests}/>
+          <Route path={ROUTE_STUDY} component={Study}/>
         </Switch>
       </main>
       <Footer/>
@@ -45,7 +58,7 @@ export default provider(
     /* stores */
     [Stores, toFactory(() => stores)],
     [AuthStore, toFactory(() => stores.auth)],
-    [AppStore, toFactory(() => stores.app)],
+    [UiStore, toFactory(() => stores.ui)],
     /* services */
     AuthService,
 )(App);

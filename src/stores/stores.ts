@@ -1,16 +1,17 @@
 import {AuthStore} from "./auth";
-import {AppStore} from "./app-store";
 import {BaseStore} from "./base";
+import {UiStore} from "./ui";
 
 
 class Stores extends BaseStore {
-    app: AppStore
-    auth!: AuthStore
+    auth: AuthStore
+    ui: UiStore
 
     constructor() {
-        super()
-        this.auth = new AuthStore()
-        this.app = new AppStore()
+        super();
+
+        this.auth = new AuthStore();
+        this.ui = new UiStore();
     }
 }
 
