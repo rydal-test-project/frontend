@@ -5,7 +5,6 @@ import {Switch, Route} from 'react-router-dom'
 import {AuthStore, stores, Stores, UiStore} from "@stores";
 import {AuthService} from "@services";
 
-import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 import Index from "../views/Index";
 import About from "../views/About";
@@ -13,6 +12,7 @@ import Interests from "../views/Interests";
 import Study from "../views/Study/Study";
 import {throttle} from "lodash";
 import {ROUTE_INDEX, ROUTE_INTERESTS, ROUTE_STUDY} from "@constants";
+import Header from "./layouts/header";
 
 
 const App: React.FC = () => {

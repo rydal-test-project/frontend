@@ -1,17 +1,11 @@
-.header {
-  width: 100%;
-  padding: 15px 0;
-  font-size: 1.3rem;
-}
-
 .nav {
   position: relative;
 
-  &__links-list {
+  &__linksList {
     display: flex;
     justify-content: center;
     text-align: center;
-    &-item {
+    &Item {
     }
   }
 
